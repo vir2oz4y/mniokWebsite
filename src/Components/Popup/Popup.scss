@@ -1,0 +1,37 @@
+@import "./src/Css/consts";
+
+.popup{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  background-color: $background-dark;
+  //width:50%;
+  border-radius: 15px;
+  padding:1em;
+  color:$color;
+  border:solid 1px $border-color;
+
+  &__header{
+    font-size:2em;
+    padding-left: .5em;
+    //text-align:center;
+    padding-bottom: .3em;
+    margin-bottom:.3em;
+    border-bottom: 1px solid $border-color;
+
+
+    >div{
+      display: flex;
+      justify-content:space-between;
+
+      >div{
+        &:last-child {
+          cursor:pointer;
+          display:flex;
+          align-items:start;
+        }
+      }
+    }
+  }
+}

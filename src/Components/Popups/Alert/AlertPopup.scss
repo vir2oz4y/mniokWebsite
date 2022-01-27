@@ -1,0 +1,23 @@
+@import "./src/Css/consts";
+
+.alert_popup{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  background-color: $background-dark;
+  //width:50%;
+  border-radius: 15px;
+  padding:1em;
+  color:$color;
+  border:solid 1px $border-color;
+
+
+  .MuiAlert-root{
+    background-color:inherit;
+  }
+
+  .MuiAlert-message, .MuiAlert-action{
+    color:#fff;
+  }
+}

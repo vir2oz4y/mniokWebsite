@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 function App(props) {
   return (
-    <div className="App">
+    <div>
       kek v
         <Outlet />
     </div>

@@ -1,0 +1,48 @@
+@import "./src/Css/consts";
+
+
+.navbar {
+  position: fixed;
+  z-index: 1;
+  width: 10em;
+  height: 100vh;
+  background-color: $background-dark;
+  border-right: solid 1px $border-color;
+
+  &__logo {
+
+    padding: 0.3em;
+    color: $color;
+    text-align: center;
+
+    > span {
+      font-size: 46px;
+    }
+  }
+
+  &__elements {
+    color: $color;
+
+    .nav_element {
+      display: flex;
+      cursor: pointer;
+
+      &:hover {
+        > div {
+          >svg{
+            opacity:.6;
+          }
+          > span {
+            opacity:.6;
+          }
+        }
+      }
+
+      > div {
+        &:first-child {
+          margin-right: .3em;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@import "./src/Css/consts";
+
+header{
+  width:100%;
+  position:fixed;
+  height:4em;
+  background-color: $background-dark;
+  border-bottom: solid 1px $border-color;
+}
