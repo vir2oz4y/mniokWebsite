@@ -1,6 +1,6 @@
 import {createContext, useContext, useEffect, useState} from "react";
 import {apiAxios} from "./Axios";
-
+import { useNavigate } from "react-router-dom";
 
 export const defaultValue = {
     token:"",
@@ -15,6 +15,10 @@ export const AccountContext = createContext(defaultValue);
 const useProvideAccount = () => {
     const [token, setToken] = useState(localStorage.getItem("token"));
 
+    const [accountInfo, setAccountInfo] = useState({balance:0, login:"", email:""})
+
+    const navigate = useNavigate()
+
     useEffect(()=>{
 
         if (token){
@@ -24,8 +28,20 @@ const useProvideAccount = () => {
         else{
             localStorage.removeItem("token")
             apiAxios.defaults.headers = { 'authorization': "" }
+            navigate("/login")
         }
 
+    },[token])
+
+
+
+    useEffect(()=>{
+        if (token){
+            apiAxios.get("user")
+                .then((res)=>{
+                    setAccountInfo(res.data)
+                })
+        }
     },[token])
 
     const Login = (token) =>{
@@ -39,6 +55,8 @@ const useProvideAccount = () => {
     return {
         token,
         Login,
+        Logout,
+        accountInfo
     };
 };
 

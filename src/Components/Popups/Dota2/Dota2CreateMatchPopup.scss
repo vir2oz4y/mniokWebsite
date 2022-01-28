@@ -1,0 +1,20 @@
+.dota2_create_match{
+  width:800px;
+  margin-top: 1em;
+
+  &__element{
+
+    display: flex;
+    margin-bottom: 2em;
+
+    &__title{
+      min-width: 150px;
+      margin-right: 1em;
+      padding-right: 1em;
+      border-right: solid 1px #ccc;
+      font-size: 20px;
+      font-weight: 300;
+
+    }
+  }
+}

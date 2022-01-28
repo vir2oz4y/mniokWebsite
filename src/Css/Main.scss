@@ -14,10 +14,40 @@
 
     .content{
       color:$color;
-      padding: 4em 0 0 10em;
+      padding: 4em 0 0 12em;
 
       >div{
         padding: 2em;
+
+        .page{
+
+          &__header{
+            display: flex;
+            align-items: center;
+            justify-content:space-between;
+
+            >div{
+              &:nth-child(2){
+                display: flex;
+
+                >div{
+                  &:not(:last-child){
+                    margin-right: 1em;
+                  }
+                }
+              }
+            }
+            &__title{
+              >span{
+                font-size:35px;
+              }
+            }
+
+            padding-bottom: 1em;
+            border-bottom: 1px solid $border-color;
+            margin-bottom: 1em;
+          }
+        }
       }
     }
   }

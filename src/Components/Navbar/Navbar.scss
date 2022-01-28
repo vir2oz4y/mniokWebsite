@@ -4,7 +4,7 @@
 .navbar {
   position: fixed;
   z-index: 1;
-  width: 10em;
+  width: 12em;
   height: 100vh;
   background-color: $background-dark;
   border-right: solid 1px $border-color;
@@ -22,25 +22,56 @@
 
   &__elements {
     color: $color;
+    padding: 1.4em;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    height:calc(100% - 8em);
+
+    >div{
+      &:last-child {
+        align-self: end;
+      }
+    }
+    &__title{
+      font-weight:600;
+      margin-bottom: 1em;
+
+      &:not(:first-child){
+        margin-top:2em;
+      }
+    }
 
     .nav_element {
       display: flex;
       cursor: pointer;
+      padding:.6em 2em;
+      border-radius: 15px;
+      margin-top: .5em;
+
+
+      &.selected{
+        background-color:#242A38;
+      }
 
       &:hover {
-        > div {
-          >svg{
-            opacity:.6;
-          }
-          > span {
-            opacity:.6;
-          }
-        }
+        background-color:#242A38;
+
+        //> div {
+        //  >svg{
+        //    opacity:.6;
+        //  }
+        //  > span {
+        //    opacity:.6;
+        //  }
+        //}
       }
 
       > div {
         &:first-child {
           margin-right: .3em;
+          display:flex;
+          align-items: center;
         }
       }
     }

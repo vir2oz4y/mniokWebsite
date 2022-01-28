@@ -1,9 +1,47 @@
 @import "./src/Css/consts";
 
 header{
-  width:100%;
+  width:calc(100% - 12em);
   position:fixed;
+  padding-left: 12em;
   height:4em;
   background-color: $background-dark;
   border-bottom: solid 1px $border-color;
+  display:flex;
+  align-items: center;
+  justify-content: end;
+
+  >div{
+    padding:0 1em;
+    display:flex;
+
+
+    //Баланс
+    >div{
+
+      &:not(:last-child){
+        margin-right: 2em;
+      }
+
+      &:first-child{
+        display: flex;
+        color:$color;
+
+        >div{
+          display: flex;
+          align-items: center;
+
+
+          &:first-child{
+            margin-right: .3em;
+          }
+
+          &:last-child{
+            font-size: 20px;
+          }
+        }
+
+      }
+    }
+  }
 }

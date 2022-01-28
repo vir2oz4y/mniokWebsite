@@ -1,0 +1,40 @@
+@import "./src/Css/consts";
+
+.select_hero_popup{
+  padding-top: 1em;
+
+  >div{
+    display: flex;
+
+    &:last-child{
+      display: flex;
+      justify-content:center;
+    }
+
+    >div{
+
+      &:not(:last-child){
+        margin-right:1em;
+      }
+
+      >div{
+        width:360px;
+
+        &:first-child{
+          font-size: 20px;
+          border-bottom: 1px solid $border-color;
+          padding-bottom:.3em;
+          margin-bottom:.3em;
+        }
+        &:last-child {
+
+          display: flex;
+          flex-wrap: wrap;
+
+        }
+      }
+
+    }
+  }
+
+}

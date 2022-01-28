@@ -1,14 +1,16 @@
-.register_popup{
-  >div{
+.register_popup {
 
-    &:first-child{
-      >div{
-        width:500px;
+  > div {
+    > div {
+      &:first-child {
+        > div {
+          width: 500px;
+        }
+
+        margin-bottom: 1em;
       }
-
-      margin-bottom: 1em;
     }
-
 
   }
 }
+

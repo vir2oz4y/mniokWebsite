@@ -8,6 +8,11 @@ import {Popup} from "../Components/Popup/Popup";
 import {RegisterPopup} from "../Components/Popups/Register/RegisterPopup";
 import {apiAxios} from "../Axios";
 import {string} from "bfj/src/events";
+import useAccount from "../Context";
+import {UseAxios} from "../Components/UseAxios/UseAxios";
+import {AlertPopup} from "../Components/Popups/Alert/AlertPopup";
+import {LoadButton} from "../Components/Buttons/LoadingButton";
+
 
 export const Login = () => {
 
@@ -15,8 +20,17 @@ export const Login = () => {
 
     const [auth, setAuth] = useState({login:"", password:""})
 
-    const Login = () =>{
+    const { isLoading, error, setError, Send } = UseAxios({method:"post", url:"user/login", data:auth})
 
+    const navigate = useNavigate()
+    const { Login } = useAccount();
+
+    const DoLogIn = async () =>{
+        await Send()
+            .then((responseData) =>{
+                Login(responseData.token)
+                navigate("/")
+            })
     }
 
     return(
@@ -28,6 +42,7 @@ export const Login = () => {
                 <div>
                     <div>
                         <Input
+                            required
                             label="Логин"
                             onInput={(val)=>setAuth({...auth, login:val})}
                         />
@@ -35,6 +50,7 @@ export const Login = () => {
 
                     <div>
                         <Input
+                            required
                             label="Пароль"
                             type={"password"}
                             onInput={(val)=>setAuth({...auth, password:val})}
@@ -42,11 +58,14 @@ export const Login = () => {
                     </div>
 
                     <div style={{display: "flex", justifyContent:"space-between"}}>
-                        <Button
-                            variant="contained"
+
+                        <LoadButton
+                            loading={isLoading}
+                            onClick={DoLogIn}
                         >
-                            ВОЙТИ
-                        </Button>
+                            Войти
+                        </LoadButton>
+
 
                         <Button
                             variant="contained"
@@ -57,6 +76,8 @@ export const Login = () => {
                     </div>
                 </div>
             </div>
+
+            <AlertPopup alertResult={error} setAlertResult={setError}/>
 
             <RegisterPopup opened={showRegisterPopup} setOpened={setShowRegisterPopup}/>
         </div>
