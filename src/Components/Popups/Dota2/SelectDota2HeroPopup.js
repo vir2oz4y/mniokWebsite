@@ -2,25 +2,58 @@ import {Popup} from "../../Popup/Popup";
 import {useEffect, useState} from "react";
 import {UseAxios} from "../../UseAxios/UseAxios";
 import "./SelectDota2HeroPopup.scss"
-import {Button} from "@mui/material";
+import {Button, Skeleton} from "@mui/material";
+import classNames from "classnames";
 
-export const SelectDota2HeroPopup = ({opened, setOpened}) =>{
+export const SelectDota2HeroPopup = ({opened, setOpened, onHeroSelect, selectedHeroesProp}) => {
 
-    const { isLoading, error, Send } = UseAxios({method:"get", url:"dota/heroes"})
+    const {isLoading, error, Send} = UseAxios({method: "get", url: "dota/heroes"})
+
+    const [selectedHeroes, setSelectedHeroes] = useState(selectedHeroesProp)
+
     const [heroes, setHeroes] = useState([])
 
-    const agility = heroes.filter(el=>el.type === "Ловкость")
-    const strength = heroes.filter(el=>el.type === "Сила")
-    const intellect = heroes.filter(el=>el.type === "Интеллект")
+    const agility = heroes.filter(el => el.type === "Ловкость")
+    const strength = heroes.filter(el => el.type === "Сила")
+    const intellect = heroes.filter(el => el.type === "Интеллект")
 
-    useEffect(()=>{
+    useEffect(() => {
         Send()
-            .then((data)=>{
+            .then((data) => {
                 setHeroes(data.dotaHeroes)
             })
-    },[])
+    }, [])
 
-    return(
+    const SelectHero = (hero) =>{
+        if (selectedHeroes.some(el=>el.key === hero.key)){
+            setSelectedHeroes([...selectedHeroes.filter(el=>el.key !== hero.key)])
+        }
+        else setSelectedHeroes([...selectedHeroes, hero])
+    }
+
+    const SelectHeroImg = (heroes) => {
+
+        const images = heroes.map((el, i) =>
+            <div key={i}
+                 className={classNames({selected: selectedHeroes.some(e=>e.name === el.name)})}
+                 style={{padding: "5px"}}
+                 onClick={()=>SelectHero(el)}
+            >
+                <div>
+                    <img src={el.imgUrl} alt="" />
+                </div>
+
+            </div>)
+
+        return (
+            <div>
+                {images}
+            </div>
+        )
+    }
+
+
+    return (
         <Popup opened={opened} setOpened={setOpened} header={"Выбор героя"}>
             <div className={"select_hero_popup"}>
 
@@ -29,14 +62,10 @@ export const SelectDota2HeroPopup = ({opened, setOpened}) =>{
                         <div>
                             Сила
                         </div>
-                        <div>
-                            {strength.map((el, i)=><div key={i}>
-                                <div style={{margin:"5px"}}>
-                                    <img src={el.imgUrl} alt="" style={{height:"25px", width:"50px"}}/>
-                                </div>
 
-                            </div>)}
-                        </div>
+                        {isLoading && <Skeleton variant="rectangular" width={375} height={368} />}
+
+                        {SelectHeroImg(strength)}
 
                     </div>
 
@@ -45,14 +74,11 @@ export const SelectDota2HeroPopup = ({opened, setOpened}) =>{
 
                             Ловкость
                         </div>
-                        <div>
-                            {agility.map((el, i)=><div key={i}>
-                                <div style={{margin:"5px"}}>
-                                    <img src={el.imgUrl} alt="" style={{height:"25px", width:"50px"}}/>
-                                </div>
 
-                            </div>)}
-                        </div>
+                        {isLoading && <Skeleton variant="rectangular" width={375} height={368} />}
+
+                        {SelectHeroImg(agility)}
+
                     </div>
 
 
@@ -60,21 +86,20 @@ export const SelectDota2HeroPopup = ({opened, setOpened}) =>{
                         <div>
                             Интеллект
                         </div>
-                        <div>
-                            {intellect.map((el, i)=><div key={i}>
-                                <div style={{margin:"5px"}}>
-                                    <img src={el.imgUrl} alt="" style={{height:"25px", width:"50px"}}/>
-                                </div>
 
-                            </div>)}
-                        </div>
+                        {isLoading && <Skeleton variant="rectangular" width={375} height={368} />}
+
+                        {SelectHeroImg(intellect)}
                     </div>
                 </div>
 
                 <div>
                     <Button
                         variant="contained"
-
+                        onClick={()=>{
+                            onHeroSelect?.(selectedHeroes)
+                            setOpened(false)
+                        }}
                     >
                         Выбрать
                     </Button>

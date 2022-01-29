@@ -14,7 +14,14 @@
       border-right: solid 1px #ccc;
       font-size: 20px;
       font-weight: 300;
-
+      text-align: end;
     }
+  }
+
+  .description{
+    min-width: 580px;
+    background-color: #cccccc12;
+    padding: 0.3em 1em;
+    border-radius: 15px;
   }
 }

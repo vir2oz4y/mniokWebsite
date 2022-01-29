@@ -1,6 +1,11 @@
 @import "./src/Css/consts";
 @import "./src/Css/Pages/login";
 
+
+.MuiModal-root{
+  overflow-y: auto!important;
+}
+
 .main{
 
   display:flex;

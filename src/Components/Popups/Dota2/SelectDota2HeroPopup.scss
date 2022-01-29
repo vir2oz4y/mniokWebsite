@@ -18,7 +18,7 @@
       }
 
       >div{
-        width:360px;
+        width:375px;
 
         &:first-child{
           font-size: 20px;
@@ -31,6 +31,20 @@
           display: flex;
           flex-wrap: wrap;
 
+          >div{
+            border:solid 1px $border-color;
+          }
+
+          img{
+            width:50px;
+            height:25px;
+          }
+
+          .selected{
+            //background-color:#fff;
+            border:solid 1px $color;
+
+          }
         }
       }
 
