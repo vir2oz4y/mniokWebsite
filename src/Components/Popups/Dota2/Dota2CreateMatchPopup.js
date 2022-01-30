@@ -5,15 +5,21 @@ import Input from "../../Input/Input";
 import {SelectDota2HeroPopup} from "./SelectDota2HeroPopup";
 import {useState} from "react";
 import {SetStateObject} from "../../Helper/SetStateObject";
+import {UseAxios} from "../../UseAxios/UseAxios";
+import {LoadButton} from "../../Buttons/LoadingButton";
+import {AlertPopup} from "../Alert/AlertPopup";
 
 
 
 export const Dota2CreateMatchPopup = ({opened, setOpened}) =>{
 
     const [selectHeroPopup, setSelectHeroPopup] = useState(false)
+
+
+
     const [matchSettings, setMatchSettings] = useState({
         payment:0,
-        matchType:"1x1",
+        matchType:"Only1x1",
         rating: {
             ratingType:"without",
             fromTo:{
@@ -27,6 +33,11 @@ export const Dota2CreateMatchPopup = ({opened, setOpened}) =>{
         }
     })
 
+    const { isLoading, alert, Send } = UseAxios({method:"post", url:"dota/match", data:{settings:matchSettings}})
+
+    const CreateDotaMatch = async () =>{
+        await Send();
+    }
 
     return(
         <Popup opened={opened} setOpened={setOpened} header={"Создание матча"}>
@@ -50,7 +61,7 @@ export const Dota2CreateMatchPopup = ({opened, setOpened}) =>{
                             value={matchSettings.matchType}
                             onChange={(e)=>SetStateObject(e.target.value , setMatchSettings, "matchType")}
                         >
-                            <FormControlLabel value="1x1" control={<Radio />} label="1x1" />
+                            <FormControlLabel value="Only1x1" control={<Radio />} label="1x1" />
                             {/*<FormControlLabel value="5x5" control={<Radio />} label="5x5" />*/}
                         </RadioGroup>
                     </div>
@@ -86,6 +97,8 @@ export const Dota2CreateMatchPopup = ({opened, setOpened}) =>{
                                     <Input
                                         required
                                         label="До"
+                                        value={matchSettings.rating.fromTo.to}
+                                        onChange={(e)=>SetStateObject({from:0, to:e.target.value} , setMatchSettings, "fromTo")}
                                     />
                                 </div>}
 
@@ -100,11 +113,15 @@ export const Dota2CreateMatchPopup = ({opened, setOpened}) =>{
                                     <Input
                                         required
                                         label="От"
+                                        value={matchSettings.rating.fromTo.from}
+                                        onChange={(e)=>SetStateObject(e.target.value , setMatchSettings, "from")}
                                     />
 
                                     <Input
                                         required
                                         label="До"
+                                        value={matchSettings.rating.fromTo.to}
+                                        onChange={(e)=>SetStateObject(e.target.value , setMatchSettings, "to")}
                                     />
                                 </div>}
                             </div>
@@ -147,7 +164,7 @@ export const Dota2CreateMatchPopup = ({opened, setOpened}) =>{
                                         </div>
                                         <div style={{display: 'flex', flexWrap:"wrap"}}>
                                             {matchSettings.hero.selectedHeroes.map((el,i)=>
-                                                <div style={{marginRight:"5px"}}>
+                                                <div style={{marginRight:"5px"}} key={i}>
                                                     <img src={el.imgUrl} alt="" style={{width:"40px", height:"20px"}}/>
                                                 </div>)}
                                         </div>
@@ -173,12 +190,13 @@ export const Dota2CreateMatchPopup = ({opened, setOpened}) =>{
 
 
                 <div style={{display: 'flex', justifyContent: 'center'}}>
-                    <Button
+                    <LoadButton
                         variant="contained"
-                        onClick={()=>setSelectHeroPopup(true)}
+                        isLoading={isLoading}
+                        onClick={CreateDotaMatch}
                     >
                         Создать
-                    </Button>
+                    </LoadButton>
                 </div>
 
 
@@ -188,6 +206,9 @@ export const Dota2CreateMatchPopup = ({opened, setOpened}) =>{
                     onHeroSelect={(heroes)=>SetStateObject(heroes , setMatchSettings, "selectedHeroes")}
                     selectedHeroesProp={matchSettings.hero.selectedHeroes}
                 />}
+
+
+                {alert}
             </div>
 
         </Popup>

@@ -1,0 +1,49 @@
+@import "./src/Css/consts";
+
+.dota_element{
+  background-color: $background-dark;
+  //height:200px;
+  border-radius: 15px;
+  margin-bottom: 1em;
+  padding:1em;
+
+  &__title{
+    padding-bottom: .3em;
+    margin-bottom: 1em;
+    border-bottom: 1px solid $border-color;
+  }
+
+  &__content{
+    display: flex;
+    //height:77%;
+
+    &__element{
+      background-color:#cccccc12;
+      border-radius: 15px;
+      padding:1em;
+      display: flex;
+      flex-direction: column;
+      min-width:200px;
+      &:not(:last-child){
+        margin-right: 1em;
+      }
+
+      >div{
+        font-size: 1.3em;
+        display: flex;
+        align-items:center;
+
+
+        &:first-child{
+          //border-right: solid 1px;
+          //padding-right:.3em;
+          //margin-right:.3em;
+          display: flex;
+          border-bottom: solid 1px;
+          padding-bottom:.3em;
+          margin-bottom:.3em;
+        }
+      }
+    }
+  }
+}

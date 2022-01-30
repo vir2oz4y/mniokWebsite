@@ -15,6 +15,10 @@ export function SetStateObject(newValue, setState, key){
             }
 
             if (obj[i] instanceof Object) {
+                if (i === key){
+                    clObj[i] = value
+                    continue;
+                }
                 clObj[i] = deepClone(obj[i], key, value);
                 continue;
             }

@@ -1,6 +1,7 @@
 @import "./src/Css/consts";
 
 header{
+  z-index:1;
   width:calc(100% - 12em);
   position:fixed;
   padding-left: 12em;

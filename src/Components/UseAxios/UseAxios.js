@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {apiAxios} from "../../Axios";
-import {AlertResultInit, ShowErrorAlert} from "../Popups/Alert/AlertPopup";
+import {AlertPopup, AlertResultInit, ShowErrorAlert} from "../Popups/Alert/AlertPopup";
 
 export const UseAxios = ({method, url, data, setErrorResult}) =>{
 
@@ -23,9 +23,11 @@ export const UseAxios = ({method, url, data, setErrorResult}) =>{
             .finally(()=>setIsLoading(false));
     }
 
+    const alert = <AlertPopup alertResult={error} setAlertResult={setError}/>
 
     return {
         isLoading,
+        alert,
         setError,
         error,
         Send

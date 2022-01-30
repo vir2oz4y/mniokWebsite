@@ -1,6 +1,6 @@
 import {Button} from "@mui/material";
 import Input from "../Components/Input/Input";
-import { H1 } from "../Components/H1/H1";
+import { H1 } from "../Components/H/H1";
 
 import { useNavigate } from "react-router-dom";
 import {useState} from "react";

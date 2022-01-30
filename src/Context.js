@@ -1,4 +1,4 @@
-import {createContext, useContext, useEffect, useState} from "react";
+import {createContext, useContext, useEffect, useLayoutEffect, useState} from "react";
 import {apiAxios} from "./Axios";
 import { useNavigate } from "react-router-dom";
 
@@ -19,11 +19,12 @@ const useProvideAccount = () => {
 
     const navigate = useNavigate()
 
-    useEffect(()=>{
+    useLayoutEffect(()=>{
 
         if (token){
             localStorage.setItem("token", token);
-            apiAxios.defaults.headers = { 'authorization': token }
+            apiAxios.defaults.headers = {
+                'authorization': token }
         }
         else{
             localStorage.removeItem("token")

@@ -2,8 +2,8 @@
 
 
 .navbar {
+  z-index: 2;
   position: fixed;
-  z-index: 1;
   width: 12em;
   height: 100vh;
   background-color: $background-dark;
@@ -16,7 +16,7 @@
     text-align: center;
 
     > span {
-      font-size: 46px;
+      font-size: 3em;
     }
   }
 
