@@ -1,7 +1,7 @@
 import "./DotaElement.scss"
 
 import {H2} from "../H/H2";
-import CurrencyRubleIcon from "@mui/icons-material/CurrencyRuble";
+import {Button} from "@mui/material";
 
 export const DotaMatch = ({matchSettings}) =>{
 
@@ -65,6 +65,9 @@ export const DotaMatch = ({matchSettings}) =>{
         <div className={"dota_element"}>
             <div className={"dota_element__title"}>
                 <H2>{matchSettings.userName}</H2>
+                <Button variant="contained">
+                    Принять участие
+                </Button>
             </div>
             <div className="dota_element__content">
                 {/*<div className={"dota_element__content__element"}>*/}

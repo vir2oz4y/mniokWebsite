@@ -8,6 +8,9 @@
   padding:1em;
 
   &__title{
+    align-items:center;
+    display: flex;
+    justify-content:space-between;
     padding-bottom: .3em;
     margin-bottom: 1em;
     border-bottom: 1px solid $border-color;
