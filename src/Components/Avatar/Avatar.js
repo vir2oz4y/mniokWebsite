@@ -1,5 +1,4 @@
 import {Avatar, Button, Menu, MenuItem} from "@mui/material";
-import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import React from 'react'
 
 export const AvatarLogo = ({nickname = ""}) =>{

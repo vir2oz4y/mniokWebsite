@@ -14,7 +14,7 @@ import {AlertPopup} from "../Components/Popups/Alert/AlertPopup";
 import {LoadButton} from "../Components/Buttons/LoadingButton";
 
 
-export const Login = () => {
+export const LoginPage = () => {
 
     const [showRegisterPopup, setShowRegisterPopup] = useState(false);
 

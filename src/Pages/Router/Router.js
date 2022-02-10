@@ -1,11 +1,14 @@
 import {
     BrowserRouter,
     Routes,
-    Route
+    Route, Outlet
 } from "react-router-dom";
-import {Main} from "../Main";
-import {Login} from "../Login";
-import {Dota2Page} from "../Dota2";
+import {Main} from "../Main/Main";
+import {LoginPage} from "../LoginPage";
+import {Dota2Page} from "../Dota2Page";
+import {AccountPage} from "../AccountPage";
+import DotaMatch from "../DotaMatch";
+import AccountDotaMatches from "../AccountDotaMatches";
 
 export const Router = () =>{
 
@@ -15,14 +18,18 @@ export const Router = () =>{
 
                 <Route path="/" element={<Main />}>
                     <Route index element={<div>Kek v1</div>} />
-                    <Route path="dota2" element={<Dota2Page/>}>
-{/*                        <Route path=":teamId" element={<Team />} />
-                        <Route path="new" element={<NewTeamForm />} />
-                        <Route index element={<LeagueStandings />} />*/}
-                    </Route>
 
-                    <Route path="login" element={<Login/>}/>
-                    <Route path="register" element={<Login/>}/>
+                    <Route path="dota2" element={<Dota2Page/>}/>
+
+                    <Route path={"dota2/match/:matchId"} element={<DotaMatch/>}/>
+
+
+                    <Route path="account/settings" element={<AccountPage/>}/>
+                    <Route path={"account/dota/matches"} element={<AccountDotaMatches/>} />
+
+
+                    <Route path="login" element={<LoginPage/>}/>
+                    <Route path="register" element={<LoginPage/>}/>
                 </Route>
 
             </Routes>

@@ -1,0 +1,18 @@
+.steam_account{
+  display: flex;
+  align-items: center;
+
+  &__image_block{
+
+    margin-right: .5em;
+
+    &__img{
+      height: 50px;
+      width: 50px;
+      background-position: center;
+      background-size: contain;
+      border-radius: 50%;
+
+    }
+  }
+}

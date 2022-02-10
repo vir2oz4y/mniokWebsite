@@ -1,0 +1,17 @@
+.steam{
+
+  &__login_info{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  &__buttons{
+    display: flex;
+
+    >div{
+      &:not(:last-child){
+        margin-right: .5em;
+      }
+    }
+  }
+}

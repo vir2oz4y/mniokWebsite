@@ -1,6 +1,6 @@
 import {createContext, useContext, useEffect, useLayoutEffect, useState} from "react";
 import {apiAxios} from "./Axios";
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate, useParams, useSearchParams} from "react-router-dom";
 
 export const defaultValue = {
     token:"",
@@ -14,10 +14,23 @@ export const AccountContext = createContext(defaultValue);
  */
 const useProvideAccount = () => {
     const [token, setToken] = useState(localStorage.getItem("token"));
-
     const [accountInfo, setAccountInfo] = useState({balance:0, login:"", email:""})
-
     const navigate = useNavigate()
+
+    const ChangeUserOnline = (state) =>{
+        apiAxios.post("user/online", {isOnline:state})
+    }
+
+    useEffect(()=>{
+        if (token){
+            ChangeUserOnline(true)
+            // Подписались на событие close window and change user online state
+            window.addEventListener("beforeunload", ()=>ChangeUserOnline(false));
+
+            return(()=>window.removeEventListener("beforeunload", ()=>ChangeUserOnline(false)))
+        }
+    }, [])
+
 
     useLayoutEffect(()=>{
 
@@ -34,14 +47,16 @@ const useProvideAccount = () => {
 
     },[token])
 
+    const UpdateAccountInfo = () =>{
+        apiAxios.get("user")
+            .then((res)=>{
+                setAccountInfo(res.data)
+            })
+    }
 
-
-    useEffect(()=>{
+    useLayoutEffect(()=>{
         if (token){
-            apiAxios.get("user")
-                .then((res)=>{
-                    setAccountInfo(res.data)
-                })
+            UpdateAccountInfo()
         }
     },[token])
 
@@ -50,18 +65,39 @@ const useProvideAccount = () => {
     }
 
     const Logout = () => {
+        ChangeUserOnline(false)
         setToken(undefined)
     }
+
+    const tokenWithoutBasic = () => token.replaceAll("Basic ", "")
 
     return {
         token,
         Login,
         Logout,
-        accountInfo
+        accountInfo,
+        setAccountInfo,
+        tokenWithoutBasic,
+        UpdateAccountInfo
     };
 };
 
 export const AccountProvider = ({children}) => {
+
+    const [params, setParams] = useSearchParams();
+
+    useEffect(()=>{
+        if(params.get("steamAuth")){
+            const steamAuth = params.get("steamAuth")
+
+            params.delete("steamAuth")
+            setParams(params)
+            console.log(steamAuth)
+        }
+
+    },[params])
+
+
     const value = useProvideAccount();
     return <AccountContext.Provider value={value}>{children}</AccountContext.Provider>;
 };

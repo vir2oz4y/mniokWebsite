@@ -1,10 +1,10 @@
 import {Outlet} from "react-router-dom";
-import {Navbar} from "../Components/Navbar/Navbar";
-import "./../Css/Main.scss"
-import {Header} from "../Components/Header/Header";
+import {Navbar} from "../../Components/Navbar/Navbar";
+import "../../Css/Main.scss"
+import {Header} from "../../Components/Header/Header";
 import {createTheme} from "@mui/material";
 import {ThemeProvider} from "@material-ui/core/styles";
-import {AccountProvider} from "../Context";
+import {AccountProvider} from "../../Context";
 
 const Theme = createTheme({
     palette: {

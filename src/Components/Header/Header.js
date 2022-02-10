@@ -6,11 +6,11 @@ import useAccount from "../../Context";
 
 export const Header = () => {
     const {accountInfo} = useAccount();
-
+    console.log(accountInfo)
     return (
         <header>
             <div>
-                <div>
+                <div className={"header__balance"}>
                     <div>
                         <CurrencyRubleIcon/>
                     </div>
@@ -19,7 +19,17 @@ export const Header = () => {
                         {accountInfo.balance.toFixed(2)}
                     </div>
                 </div>
-                <AvatarLogo nickname={accountInfo.login}/>
+
+                <div>
+                    <div>
+                        {accountInfo.login}
+                    </div>
+                </div>
+
+                <div>
+                    <AvatarLogo nickname={accountInfo.login}/>
+                </div>
+
             </div>
         </header>
     )

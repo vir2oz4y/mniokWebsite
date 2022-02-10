@@ -1,45 +1,47 @@
 @import "./src/Css/consts";
 
-header{
-  z-index:1;
-  width:calc(100% - 12em);
-  position:fixed;
+header {
+  z-index: 1;
+  width: calc(100% - 12em);
+  position: fixed;
   padding-left: 12em;
-  height:4em;
+  height: 4em;
   background-color: $background-dark;
   border-bottom: solid 1px $border-color;
-  display:flex;
+  display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
 
-  >div{
-    padding:0 1em;
-    display:flex;
+  > div {
+    padding: 0 1em;
+    display: flex;
 
 
     //Баланс
-    >div{
+    > div {
+      display: flex;
+      color: $color;
+      align-items: center;
+      font-size: 20px;
 
-      &:not(:last-child){
+      &:not(:last-child) {
         margin-right: 2em;
+        border-left: solid 1px $border-color;
+        //border-bottom: solid 1px #ccc;
+        padding-left:.5em;
       }
 
-      &:first-child{
+      &:first-child {
         display: flex;
-        color:$color;
 
-        >div{
+
+        > div {
           display: flex;
-          align-items: center;
 
-
-          &:first-child{
+          &:first-child {
             margin-right: .3em;
           }
 
-          &:last-child{
-            font-size: 20px;
-          }
         }
 
       }

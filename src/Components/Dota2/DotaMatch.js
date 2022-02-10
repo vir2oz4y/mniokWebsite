@@ -2,9 +2,11 @@ import "./DotaElement.scss"
 
 import {H2} from "../H/H2";
 import {Button} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 export const DotaMatch = ({matchSettings}) =>{
 
+    const navigate = useNavigate()
 
     const ratingElementText = () =>{
          switch (matchSettings.rating.ratingType){
@@ -65,7 +67,7 @@ export const DotaMatch = ({matchSettings}) =>{
         <div className={"dota_element"}>
             <div className={"dota_element__title"}>
                 <H2>{matchSettings.userName}</H2>
-                <Button variant="contained">
+                <Button variant="outlined" onClick={()=>navigate(`match/${matchSettings.matchId}`)}>
                     Принять участие
                 </Button>
             </div>

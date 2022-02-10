@@ -1,6 +1,6 @@
 import {Popup} from "../../Popup/Popup";
 import "./Dota2CreateMatchPopup.scss";
-import {Button, FormControlLabel, InputAdornment, Radio, RadioGroup} from "@mui/material";
+import {Button, FormControlLabel, Radio, RadioGroup} from "@mui/material";
 import Input from "../../Input/Input";
 import {SelectDota2HeroPopup} from "./SelectDota2HeroPopup";
 import {useState} from "react";
@@ -8,6 +8,7 @@ import {SetStateObject} from "../../Helper/SetStateObject";
 import {UseAxios} from "../../UseAxios/UseAxios";
 import {LoadButton} from "../../Buttons/LoadingButton";
 import {AlertPopup} from "../Alert/AlertPopup";
+import useAccount from "../../../Context";
 
 
 
@@ -15,6 +16,7 @@ export const Dota2CreateMatchPopup = ({opened, setOpened}) =>{
 
     const [selectHeroPopup, setSelectHeroPopup] = useState(false)
 
+    const {UpdateAccountInfo} = useAccount()
 
 
     const [matchSettings, setMatchSettings] = useState({
@@ -36,7 +38,11 @@ export const Dota2CreateMatchPopup = ({opened, setOpened}) =>{
     const { isLoading, alert, Send } = UseAxios({method:"post", url:"dota/match", data:{settings:matchSettings}})
 
     const CreateDotaMatch = async () =>{
-        await Send();
+        await Send()
+            .then(()=>{
+                UpdateAccountInfo()
+                setOpened(false)
+            });
     }
 
     return(
